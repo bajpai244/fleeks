@@ -13,7 +13,7 @@ const profile = require('../assets/pic1.jpg')
 const menu = require('../assets/menu.png')
 const menu1 = require('../assets/menu1.png')
 
-export default ({ state, changeState }) => (
+export default ({ state, changeState, data }) => (
   <View
     style={{
       flex: 1,
@@ -32,9 +32,16 @@ export default ({ state, changeState }) => (
       <View style={{ width: '100%', height: '100%' }}>
         <Menu />
         <Container>
-          <Name />
+          <Name
+            first_name={data.fullname.first_name}
+            last_name={data.fullname.last_name}
+          />
           <Follow />
-          <StatsContainer />
+          <StatsContainer
+            no_of_posts={data.no_of_posts}
+            no_of_followers={data.no_of_followers}
+            no_of_following={data.no_of_following}
+          />
           <Nav state={state} changeState={changeState} />
         </Container>
       </View>
@@ -54,13 +61,13 @@ const Container = ({ children }) => (
   </View>
 )
 
-const Name = () => (
+const Name = ({ first_name = 'N/A', last_name = 'N/A' }) => (
   <>
     <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 30 }}>
-      Bully
+      {first_name}
     </Text>
     <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 30 }}>
-      Lamjarred
+      {last_name}
     </Text>
   </>
 )
@@ -79,7 +86,11 @@ const Follow = () => (
   </View>
 )
 
-const StatsContainer = () => (
+const StatsContainer = ({
+  no_of_posts = 25,
+  no_of_followers = 859,
+  no_of_following = 675,
+}) => (
   <View
     style={{
       flexDirection: 'row',
@@ -89,9 +100,9 @@ const StatsContainer = () => (
       alignSelf: 'stretch',
       paddingHorizontal: 40,
     }}>
-    <Stats number={'25'} label={'Posts'} />
-    <Stats number={'859'} label={'Followers'} />
-    <Stats number={'675'} label={'Following'} />
+    <Stats number={no_of_posts} label={'Posts'} />
+    <Stats number={no_of_followers} label={'Followers'} />
+    <Stats number={no_of_following} label={'Following'} />
   </View>
 )
 

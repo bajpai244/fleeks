@@ -2,10 +2,14 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import theme from '../utils/theme'
 
-export default () => (
+export default ({ data }) => (
   <View style={{ marginTop: 3 }}>
-    {data.map((ele) => (
-      <SkillComp label={ele.label} perc={ele.perc} perccolor={ele.perccolor} />
+    {data.skills.map((ele, index) => (
+      <SkillComp
+        label={ele.skill_name}
+        perc={ele.skill_level}
+        perccolor={datacomp[index].perccolor}
+      />
     ))}
   </View>
 )
@@ -63,7 +67,7 @@ const LevelLabel = ({ text = 'no level', style = {} }) => (
   </View>
 )
 
-const data = [
+const datacomp = [
   { label: 'Design', perc: 61, perccolor: theme.color.percblue },
   { label: 'Marketing', perc: 31, perccolor: theme.color.percred },
   { label: 'Coding', perc: 91, perccolor: theme.color.pergreen },

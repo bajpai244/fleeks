@@ -3,24 +3,22 @@ import { View, Text, Image } from 'react-native'
 import Unorderedlist from 'react-native-unordered-list'
 import theme from '../utils/theme'
 
-export default () => (
+export default ({ data }) => (
   <View style={{ marginHorizontal: 8, marginTop: 3 }}>
-    {data.map((ele) => (
+    {data.experiences.map((ele, index) => (
       <ExperienceCard
-        label={ele.label}
+        label={'Work Experience'}
         position={ele.position}
-        positionlabel={ele.positionlabel}
-        meta={ele.meta}
+        positionlabel={`${ele.company_name} | ${ele.duration}`}
+        meta={ele.information}
         key={ele.label}
       />
     ))}
-    {historydata.map((ele) => (
-      <History
-        label={ele.label}
-        history={ele.history}
-        style={{ marginTop: 6, marginBottom: 6 }}
-      />
-    ))}
+    <History
+      label={'Academic History'}
+      history={data.academic_history}
+      style={{ marginTop: 6, marginBottom: 6 }}
+    />
   </View>
 )
 
@@ -140,13 +138,17 @@ const HistoryMeta = ({ lable, meta }) => (
 const History = ({ label, history = [], style = {} }) => (
   <Cont style={style}>
     <Title label={label} />
+    {console.log(history)}
     {history.map((ele) => (
-      <HistoryMeta lable={ele.label} meta={ele.meta} />
+      <HistoryMeta
+        lable={ele.institute_name}
+        meta={`${ele.certification_obtained} | ${ele.position} `}
+      />
     ))}
   </Cont>
 )
 
-const data = [
+const datacomp = [
   {
     label: 'Work Experience',
     position: 'Social Media Officer',
